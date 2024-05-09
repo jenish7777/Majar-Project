@@ -21,19 +21,19 @@ module.exports.showListing=async(req,res)=>{
     }
     res.render("listings/show",{listing})
  }
- 
-module.exports.createListing=async(req,res,next)=>{
-    let url=req.file.path;
-    let filename=req.file.filename;
-    let listing=req.body.listing;
-    let newlisting=new Listing(listing);
-    newlisting.Owner=req.user._id;
-    newlisting.image={url,filename};
-    await newlisting.save();
-    req.flash("success","New listing Created");
-    res.redirect("/listings");
-}
 
+    module.exports.createListing=async(req,res,next)=>{
+        let url=req.file.path;
+        let filename=req.file.filename;
+        let listing=req.body.listing;
+        let newlisting=new Listing(listing);
+        newlisting.Owner=req.user._id;
+        newlisting.image={url,filename};
+        await newlisting.save();
+        req.flash("success","New listing Created");
+        res.redirect("/listings");
+    }
+    
 module.exports.renderEditForm=async(req,res)=>{
     let {id}=req.params;
     const listing=await Listing.findById(id);
