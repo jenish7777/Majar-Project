@@ -32,6 +32,7 @@ module.exports.showListing=async(req,res)=>{
         await newlisting.save();
         req.flash("success","New listing Created");
         res.redirect("/listings");
+        return;
     }
     
 module.exports.renderEditForm=async(req,res)=>{
